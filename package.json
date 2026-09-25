@@ -1,0 +1,120 @@
+{
+	"name": "techstack-gitignore",
+	"displayName": "TechStack .gitignore Builder",
+	"description": "Search, download, and combine .gitignore rules from templates directly from within the editor.",
+	"version": "1.0.0",
+	"author": "Tanmay Pachpande <ptanmay143@outlook.com>",
+	"publisher": "ptanmay143",
+	"icon": "icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ptanmay143/techstack-gitignore"
+	},
+	"bugs": {
+		"url": "https://github.com/ptanmay143/techstack-gitignore/issues"
+	},
+	"homepage": "https://github.com/ptanmay143/techstack-gitignore",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.66.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Other"
+	],
+	"keywords": [
+		"multi-root ready"
+	],
+	"activationEvents": [
+		"onCommand:gitignore.addgitignore"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "gitignore.addgitignore",
+				"title": "Add gitignore"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "gitignore extension configuration",
+			"properties": {
+				"gitignore.cacheExpirationInterval": {
+					"type": "integer",
+					"default": 3600,
+					"minimum": 0,
+					"description": "Number of seconds the template list retrieved from GitHub is cached in memory. Set to 0 to disable caching."
+				},
+				"gitignore.defaultTemplates": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"windows",
+						"linux",
+						"macos"
+					],
+					"description": "Template names that are automatically pre-selected when the .gitignore template picker opens. Names are matched case-insensitively against the GitHub template list."
+				},
+				"gitignore.downloadConcurrency": {
+					"type": "integer",
+					"default": 6,
+					"minimum": 1,
+					"maximum": 20,
+					"description": "Maximum number of .gitignore templates to download in parallel when writing the file."
+				},
+				"gitignore.backupSuffix": {
+					"type": "string",
+					"default": ".backup",
+					"description": "Suffix appended to the backup filename when using 'Backup & replace'. For example, '.backup' produces '.gitignore.backup'."
+				},
+				"gitignore.githubApiBaseUrl": {
+					"type": "string",
+					"default": "https://api.github.com",
+					"description": "Base URL of the GitHub REST API. Change this to use a GitHub Enterprise instance (e.g. https://github.example.com/api/v3)."
+				},
+				"gitignore.githubRepository": {
+					"type": "string",
+					"default": "github/gitignore",
+					"description": "GitHub repository (owner/repo) from which .gitignore templates are fetched. Change this to use a custom fork (e.g. myorg/gitignore-templates)."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "npm run check-types && npm run lint && node esbuild.js",
+		"watch": "npm-run-all -p watch:*",
+		"watch:esbuild": "node esbuild.js --watch",
+		"watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+		"package": "npm run check-types && npm run lint && node esbuild.js --production",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"check-types": "tsc --noEmit",
+		"lint": "eslint src",
+		"test": "vscode-test",
+		"vsce-package": "npx @vscode/vsce package"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.21.0",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "^22.13.5",
+		"@types/vscode": ">=1.66.0 <1.67.0",
+		"@typescript-eslint/eslint-plugin": "^8.22.0",
+		"@typescript-eslint/parser": "^8.22.0",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.4.1",
+		"@vscode/vsce": "^3.2.2",
+		"esbuild": "^0.25.0",
+		"eslint": "^9.19.0",
+		"npm-run-all": "^4.1.5",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.25.0"
+	},
+	"dependencies": {
+		"https-proxy-agent": "^7.0.6"
+	}
+}
