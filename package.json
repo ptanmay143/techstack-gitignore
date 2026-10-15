@@ -2,7 +2,7 @@
 	"name": "techstack-gitignore",
 	"displayName": "TechStack .gitignore Builder",
 	"description": "Search, download, and combine .gitignore rules from templates directly from within the editor.",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": "Tanmay Pachpande <ptanmay143@outlook.com>",
 	"publisher": "ptanmay143",
 	"icon": "icon.png",
